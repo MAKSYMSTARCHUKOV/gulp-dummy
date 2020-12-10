@@ -1,0 +1,23 @@
+@mixin mid{
+  @media screen and (min-width: 900px) {
+    @content;
+  }
+}
+
+@mixin land{
+  @media screen and (max-width: 850px) and (orientation: landscape) {
+    @content;
+  }
+}
+
+@mixin lrg{
+  @media screen and (min-width: 1900px) {
+    @content;
+  }
+}
+
+
+
+@function rem($px){
+  @return ($px / 16) * 1rem;
+}
