@@ -1,13 +1,18 @@
 const {
   parallel,
-  series
+  series,
+  src
 } = require('gulp');
 
 const gulp = require('gulp'),
   watch = require('gulp-watch'),
   prefixer = require('gulp-autoprefixer'),
   uglify = require('gulp-uglify-es').default,
+  rigger = require('gulp-rigger'),
   sass = require('gulp-sass'),
+  pug = require('gulp-pug'),
+  imagemin = require('gulp-imagemin'),
+  pngquant = require('imagemin-pngquant'),
   sourcemaps = require('gulp-sourcemaps'),
   cssmin = require('gulp-minify-css'),
   rimraf = require('rimraf'),
@@ -23,6 +28,7 @@ var path = {
     fonts: 'build/css/fonts/'
   },
   src: {
+    pug: 'src/**/*.pug',
     html: 'src/*.html',
     js: 'src/js/main.js',
     style: 'src/style/main.scss',
@@ -30,6 +36,7 @@ var path = {
     fonts: 'src/fonts/**/*.*'
   },
   watch: {
+    pug: 'src/**/*.pug',
     html: 'src/**/*.html',
     js: 'src/js/**/*.js',
     style: 'src/style/**/*.scss',
@@ -45,12 +52,24 @@ const config = {
   },
   tunnel: true,
   host: 'localhost',
-  port: 3000,
+  port: 8000,
   logPrefix: "Frontend_Wind"
 };
 
 gulp.task('html:build', function (cb) {
   gulp.src(path.src.html)
+    .pipe(rigger())
+    .pipe(gulp.dest(path.build.html))
+    .pipe(reload({
+      stream: true
+    }));
+  cb();
+});
+
+gulp.task('pug:build', function (cb) {
+  gulp.src(path.src.pug)
+    .pipe(rigger())
+    .pipe(pug())
     .pipe(gulp.dest(path.build.html))
     .pipe(reload({
       stream: true
@@ -86,6 +105,14 @@ gulp.task('style:build', function (cb) {
 
 gulp.task('image:build', function (cb) {
   gulp.src(path.src.img)
+    .pipe(imagemin({
+      progressive: true,
+      svgoPlugins:[{
+        removeViewBox: false
+      }],
+      use: [pngquant()],
+      interlaced: true
+    }))
     .pipe(gulp.dest(path.build.img))
     .pipe(reload({
       stream: true
@@ -100,7 +127,9 @@ gulp.task('fonts:build', function (cb) {
 });
 
 gulp.task('build',
-  parallel('html:build',
+  parallel(
+    'pug:build',
+    'html:build',
     'js:build',
     'style:build',
     'fonts:build',
@@ -108,6 +137,7 @@ gulp.task('build',
 );
 
 gulp.task('watch', function () {
+  watch(path.watch.pug, series('pug:build'));
   watch(path.watch.html, series('html:build'));
   watch(path.watch.style, series('style:build'));
   watch(path.watch.js, series('js:build'));
