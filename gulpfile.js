@@ -6,7 +6,7 @@ const {
 const gulp = require('gulp'),
   watch = require('gulp-watch'),
   prefixer = require('gulp-autoprefixer'),
-  uglify = require('gulp-uglify'),
+  uglify = require('gulp-uglify-es').default,
   sass = require('gulp-sass'),
   sourcemaps = require('gulp-sourcemaps'),
   cssmin = require('gulp-minify-css'),
