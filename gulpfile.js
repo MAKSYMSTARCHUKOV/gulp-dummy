@@ -78,7 +78,7 @@ gulp.task('pug:build', function (cb) {
 });
 
 gulp.task('js:build', function (cb) {
-  gulp.src(path.src.js)
+  gulp.src(path.src.js,{allowEmpty: true})
     .pipe(sourcemaps.init())
     .pipe(uglify())
     .pipe(sourcemaps.write())
@@ -90,7 +90,7 @@ gulp.task('js:build', function (cb) {
 });
 
 gulp.task('style:build', function (cb) {
-  gulp.src(path.src.style)
+  gulp.src(path.src.style,{allowEmpty: true})
     .pipe(sourcemaps.init())
     .pipe(sass())
     .pipe(prefixer())

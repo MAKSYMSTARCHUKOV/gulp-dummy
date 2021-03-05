@@ -4,8 +4,8 @@
   }
 }
 
-@mixin land{
-  @media screen and (max-width: 850px) and (orientation: landscape) {
+@mixin landscape{
+  @media screen and (orientation: landscape) {
     @content;
   }
 }
@@ -16,8 +16,36 @@
   }
 }
 
+@mixin android(){
+  @media screen and (min-width: 360px) {
+    @content;
+  }
+}
 
+// @mixin android(){
+//   @media screen and (min-width: 360px) and (min-height: 590px) {
+//     @content;
+//   }
+// }
 
-@function rem($px){
-  @return ($px / 16) * 1rem;
+@mixin iphone(){
+  @media screen and (min-width: 375px) and (min-height: 690px) {
+    @content;
+  }
+}
+
+@mixin hCenter() {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@mixin vCenter() {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@mixin aCenter() {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
