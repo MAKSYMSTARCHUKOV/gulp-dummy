@@ -1,1 +1,18 @@
 @import 'default';
+@import 'background';
+@import 'splash';
+@import 'faq';
+
+.wrapper{
+  &.--faq{
+    .sp{
+      display: none;
+    }
+    .fq{
+      display: flex;
+    }
+  }
+  .fq{
+    display: none;
+  }
+}

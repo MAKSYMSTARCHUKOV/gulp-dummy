@@ -1,5 +1,5 @@
 {
-  "name": "superb",
+  "name": "quiz",
   "version": "1.0.0",
   "dependencies": {
     "browser-sync": "^2.26.14",
