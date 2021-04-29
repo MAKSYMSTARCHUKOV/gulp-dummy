@@ -2,6 +2,9 @@ const wrapper = () => document.querySelector('.wrapper');
 const steps = {
   '1': (e) => {
     wrapper().classList.add('--faq');
+  },
+  '2': (e) => {
+    wrapper().classList.add('--quiz');
   }
 }
 

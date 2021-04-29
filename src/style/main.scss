@@ -2,17 +2,27 @@
 @import 'background';
 @import 'splash';
 @import 'faq';
+@import 'quiz';
+
 
 .wrapper{
   &.--faq{
-    .sp{
+    .sp, .qz{
       display: none;
     }
     .fq{
       display: flex;
     }
   }
-  .fq{
+  &.--quiz{
+    .sp, .fq{
+      display: none;
+    }
+    .qz{
+      display: flex;
+    }
+  }
+  .fq, .qz{
     display: none;
   }
 }
