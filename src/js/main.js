@@ -15,6 +15,7 @@ class Page {
     '2': {
       images: [
         '/img/gates.png',
+        '/img/ball_clear.png',
         '/img/sprite_goalkeeper_stands.png',
         '/img/sprite_goalkeeper_flys.png',
         '/img/sprite_goalkeeper_felt.png',
@@ -75,7 +76,147 @@ class Page {
 
 };
 
-let page;
+class Quiz {
+  goals = 0
+  task = 0
+  letters = ['A', 'B', 'C', 'D']
+  sec = 30
+  obj = [
+    {
+      q: 'Скільки секторів включає в себе європейська рулетка?',
+      a: [35, 37, 50, 100],
+      c: 50
+    },
+    {
+      q: 'Скільки секторів включає в себе європейська рулетка?',
+      a: [35, 37, 50, 100],
+      c: 35
+    }
+  ]
+  actClasses = ['--quiz-time', '--paused'];
+  messages = ['Правильно, ГооооЛ!', 'Нажаль невірно  <img src="/img/emoji.png">']
+  constructor(){
+    this.step()
+  }
+  step(task=0){
+    if(task === 0){
+      let a = document.querySelector('.qz .banner .timer .questions #total');
+      a.innerHTML = this.obj.length;
+      this.goals = 0;
+      this.qzs = [...document.querySelector('.qz .game-zone .quiz').querySelectorAll('.quiz-item')];
+      this.metafan = document.querySelector('.qz .banner .metafan');
+      this.qz = document.querySelector('.qz');
+      this.timer = this.qz.querySelector('.banner .loader .sec #sec');
+      this.message = this.qz.querySelector('.game-zone .quiz .quiz-result');
+    }
+    this.reset();       
+    let t = document.querySelector('.qz .banner .task');
+    let q = document.querySelector('.qz .game-zone .quiz');
+    let o = this.obj[task];
+    let n = document.querySelector('.qz .banner .timer .questions #current');
+    this.qzs = [...q.querySelectorAll('.quiz-item')];     
+    n.innerHTML = task + 1;
+    t.innerHTML = o.q;
+    this.correctIndex = o.a.findIndex(i => i == o.c);
+    this.correctAnswer = o.c;
+    this.qzs.forEach((q, i) => {
+      q.removeEventListener('click', this.result);
+      const s = q.children[0];
+      s.innerHTML = `${this.letters[i]} ${o.a[i]}`;
+      s.setAttribute('data-item', o.a[i]);      
+      q.addEventListener('click', this.result, false);
+    });
+    this.startCountdown();
+  }
+  reset(){
+    this.message.innerHTML = '';
+    this.stopCountdown();
+    this.actClasses.forEach(c => this.qz.classList.remove(c));
+    this.qzs.forEach(c => (c.classList.remove('--correct'), c.classList.remove('--incorrect'), c));
+    this.qz.classList.remove('--correct');
+    this.timer.textContent = this.sec;
+  }
+  startCountdown(){
+    this.qz.classList.add(this.actClasses[0]);
+    this.interval = setInterval(() => {
+      let t = this.timer.textContent;
+      if(t > 0){
+        --t;
+        this.timer.textContent = t;
+    
+      }else{
+        this.stopCountdown();
+        this.result(null, true);
+      }
+    }, 1000)
+  }
+  stopCountdown(paused=false){
+    clearInterval(this.interval);
+    if(paused){
+      this.qz.classList.add(this.actClasses[1]);
+    }
+  }
+  animate(correct=true){
+    let result = 'correct';
+    switch(correct){
+      case true:
+        this.message.innerHTML = this.messages[0];
+        this.qz.classList.add('--correct');
+        break;
+      case false:
+        result = 'incorrect';
+        this.message.innerHTML = this.messages[1];
+        break;
+    }
+    const i = this.qzs[this.correctIndex];
+    i.removeEventListener('click', this.result);
+    const timeout = () => {
+      i.classList.add('--' + result);
+      setTimeout(()=> i.classList.remove('--' + result), 500)
+    }
+    timeout();
+    const interval = setInterval(() => {
+      timeout();
+    }, 1000)
+    setTimeout(()=>{
+      clearInterval(interval);
+      setTimeout(()=>{
+        i.classList.add('--' + result);
+        setTimeout(()=>{
+          this.nextStep();
+        }, 500)
+      },500)
+    },2000)
+  }
+
+  nextStep(){
+    console.log(this.task);
+    if((this.task + 1) === this.obj.length){
+
+    }else{
+      ++this.task;
+      this.step(this.task);
+    }
+  }
+
+  result(e, correct=true){
+    let correctAnswer = false;
+    if(e !== null){
+      const s = e.target.closest('.quiz-item').children[0];
+      const a = s.dataset.item;
+      correctAnswer = quiz.correctAnswer == a;
+    }
+    quiz.stopCountdown(true);
+    if(!correct || !correctAnswer){
+      quiz.animate(false);
+    }
+    else if(correctAnswer){
+      quiz.animate();
+    }
+  }
+}
+
+let page, quiz;
 
 const wrapper = () => document.querySelector('.wrapper');
 const steps = {
@@ -92,6 +233,9 @@ function resetStep(){
 function nextStep(step){
   resetStep();
   wrapper().classList.add(steps[step]);
+  if(step == 2){
+    // quiz = new Quiz();
+  }
 }
 
 function setListeners(){
