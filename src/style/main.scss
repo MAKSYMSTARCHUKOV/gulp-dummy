@@ -6,6 +6,11 @@
 
 
 .wrapper{
+  &.--splash{
+    .sp{
+      display: block;
+    }
+  }
   &.--faq{
     .sp, .qz{
       display: none;
@@ -22,7 +27,14 @@
       display: flex;
     }
   }
-  .fq, .qz{
+  .fq, .qz, .sp{
     display: none;
   }
+}
+
+.buffer{
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  top: -1px;
 }

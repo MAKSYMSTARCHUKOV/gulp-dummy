@@ -30,7 +30,7 @@ var path = {
   src: {
     pug: 'src/**/*.pug',
     html: 'src/*.html',
-    js: 'src/js/main.js',
+    js: 'src/js/*.js',
     style: 'src/style/main.scss',
     img: 'src/img/**/*.*',
     fonts: 'src/fonts/**/*.*'
