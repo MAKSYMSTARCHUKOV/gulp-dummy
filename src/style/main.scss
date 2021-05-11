@@ -9,26 +9,28 @@
   &.--splash{
     .sp{
       display: block;
+      opacity: 1;
+      visibility: visible;
     }
   }
   &.--faq{
-    .sp, .qz{
-      display: none;
-    }
     .fq{
       display: flex;
+      opacity: 1;
+      visibility: visible;
     }
   }
   &.--quiz{
-    .sp, .fq{
-      display: none;
-    }
     .qz{
       display: flex;
+      opacity: 1;
+      visibility: visible;
     }
   }
   .fq, .qz, .sp{
-    display: none;
+    opacity: 0;
+    visibility: hidden;  
+    transition: visibility 0s linear, opacity .2s linear;
   }
 }
 

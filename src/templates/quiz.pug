@@ -1,6 +1,4 @@
 .qz.fullscreen.abs
-  .btn.abs#btn-2
-  .btn.abs#btn-3
   img#logo.abs(src="img/logo.svg" alt="First")
   .banner
     .timer
@@ -40,3 +38,50 @@
         span
       .quiz-item
         span
+  .done
+    h2 Хочеш
+      br
+      .
+        спробувати забити усі голи?
+    span Адже новенький айфон
+      br
+      .
+        сам себе не виграє
+    img#phones(src="img/phones.png")
+    .btn#btn-2 Спробувати ще раз
+    //- .btn#next-btn Перейти далі
+  .done.final
+    img#metafan.abs(src="img/metafan.png")
+    h2 Вітаємо!
+      br
+      .
+        Забито 3 голи
+    span Три шанси отримати
+      br
+      .
+        новесенький айфон
+      br
+      .
+        вже в тебе!
+      br
+      .
+        Реєструйся та скористайся
+      br
+      .
+        ними для розіграшу.
+    form(name="register")
+      .input
+        img(src="img/name.svg" alt="Name")
+        input(type="text" name="name"  placeholder="Ім'я")
+      .input
+        img(src="img/message.svg" alt="Email")
+        input(type="text" name="email" placeholder="Email")
+      label
+        input(type="checkbox" name="mature" hidden)
+        .round
+          img(src="img/check.svg", alt="!")
+        span Мені вже виповнилось 21 рік та я погоджуюсь
+          br
+          .
+            на обробку персональних даних.
+    .btn#btn-3 Зареєструватись

@@ -4,11 +4,6 @@
   align-items: center;
   padding: 16px 0 33px;
   position: relative;
-  .btn{
-    width: 1px;
-    height: 1px;
-    top: -1px;
-  }
   img{
     &#logo{
       z-index: 2;
@@ -136,6 +131,7 @@
           height: 100%;
           background-repeat: no-repeat;
           background-position: left center;
+          background-size: contain;
           background-image: url(/img/sprite_goalkeeper_stands.png);
           animation: g-stands 2s ease-in-out infinite alternate;
         }
@@ -215,6 +211,51 @@
       }
     }
   }
+  .done{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    opacity: 0;
+    visibility: hidden;
+    background-color: rgba(#222232, .95);
+    align-items: center;
+    padding: 55px 0 33px;
+    transition: visibility 0s .25s linear, opacity .2s linear;
+    img{
+      &#metafan{
+        width: 100%;
+        top: -152px;
+      }
+      &#phones{
+        margin-top: auto;
+        margin-bottom: 36px;
+      }
+    }
+    h2{
+      color: $yellow;
+      font-family: 'Cera Pro Bold';
+      font-size: 38px;
+      line-height: 40px;
+      text-align: center;
+      margin-top: 176px;
+    }
+    span{
+      margin-top: 18px;
+      font-size: 22px;
+      line-height: 28px;
+      text-align: center;
+    }
+    .btn{
+      &#btn-2{
+        background-position-y: -59px;
+        color: $blue;
+        margin-bottom: 5px;
+      }
+    }
+  }
   &.--quiz-time{
     .banner{
       .loader{
@@ -240,6 +281,7 @@
         }
       }  
     }
+    $pos: up-left, up-right, down-left, down-right;
     &.--correct,  &.--incorrect{
       .game{
         img{
@@ -247,8 +289,41 @@
             display: none;
           }
         }
+        .goalkeeper{
+          width: 329px;
+          height: 339px;       
+          @include hCenter;
+          perspective: none;
+          transform-style: flat;
+          top: -18px;
+          transition-property: width, height;
+          transition-duration: 0s;
+          transition-delay: .5s;
+          transform: translateX(-50%) scale(0.7);
+          .picture{
+            width: 100%;
+            height: 100%;
+            background-repeat: no-repeat;
+            background-position: left center;
+            background-image: url(/img/sprite_goalkeeper_flys.png);
+            transition-property: background-image;
+            transition-duration: 0s;
+            transition-delay: .5s;
+            animation:none;
+          }
+        }
         .shadow{
           display: none;
+        }
+      }
+      
+      &.--down-left, &.--down-right{
+        .game{
+          .goalkeeper{
+            .picture{
+              background-image: url(/img/sprite_goalkeeper_felt.png);
+            }
+          }
         }
       }
     } 
@@ -260,14 +335,118 @@
           }
         }
       }
-      &.--up-left{
-        .game{
-          img{
-            &.ball-clear{
-              display: block;
-              animation: up-left 2s ease-out forwards;
+      @each $p in $pos {
+        &.--#{$p}{
+          .game{
+            img{
+              &.ball-clear{
+                display: block;
+                animation: $p 2s ease-out forwards;
+              }
             }
           }
+          .game{              
+            .goalkeeper{
+              animation: correct-#{$p} 1.5s .5s ease-out forwards;
+            }
+          }
+        }  
+      }
+    }
+
+    &.--incorrect{
+      $pos: up-left, up-right;
+      $pos-down: down-left, down-right;
+      @each $p in $pos {
+        &.--#{$p}{
+          .game{
+            img{
+              &.ball-clear{
+                display: block;
+                animation: $p 2s ease-out forwards;
+              }
+            }
+          }
+          .game{              
+            .goalkeeper{
+              animation: incorrect-#{$p} 1.5s .5s ease-out forwards;
+            }
+          }
+        }  
+      }
+      @each $p in $pos-down {
+        &.--#{$p}{
+          .game{
+            img{
+              &.ball-clear{
+                display: block;
+                animation: incorrect-#{$p} 2s ease-out forwards;
+              }
+            }
+          }
+          .game{              
+            .goalkeeper{
+              animation: correct-#{$p} 1.5s .5s ease-out forwards;
+            }
+          }
+        }  
+      }
+    }
+  }
+  &.--again, &.--done{
+    img{
+      &#logo{
+        position: relative;
+        left: unset;
+        width: 216px;
+        top: 53px;
+      }
+    }
+    .banner{
+      opacity: 0;
+      visibility: hidden;
+      transition: visibility 0s .25s linear, opacity .2s linear;
+    }
+    .game-zone{
+      .game{
+        .goalkeeper, .shadow{
+          opacity: 0;
+          visibility: hidden;
+          transition: visibility 0s .25s linear, opacity .2s linear;
+        }
+        img{
+          &.ball, &.ball-clear{
+            opacity: 0;
+            visibility: hidden;
+            transition: visibility 0s .25s linear, opacity .2s linear;
+          }
+        }
+      }
+      .quiz{
+        opacity: 0;
+        visibility: hidden;
+        transition: visibility 0s .25s linear, opacity .2s linear;
+      }
+    }
+    .done{
+      transition: visibility 0s linear, opacity .2s linear;
+    }
+  }
+  &.--again{
+    .done{
+      &:not(.final){
+        opacity: 1;
+        visibility: visible; 
+      }
+    }
+  }
+  &.--done{
+    .done{
+      &.final{
+        opacity: 1;
+        visibility: visible;
+        form{
+          margin-top: auto;
         }
       }
     }
@@ -329,5 +508,104 @@
   }
   100%{
     transform: translate(-176px, -265px) rotate(2350deg) scale(.3);
+  }
+}
+
+@keyframes correct-up-left {
+  0%{
+    transform: translate(-50%) rotateY(180deg) scale(.7)
+  }
+  100%{
+    transform: translate(-69%, -12%) rotateY(180deg) scale(.6)
+  }
+}
+
+@keyframes incorrect-up-left {
+  0%{
+    transform: translate(-50%) rotateY(180deg) scale(.7)
+  }
+  100%{
+    transform: translate(-73%, -21%) rotateY(180deg) scale(.6)
+  }
+}
+
+@keyframes up-right {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(96px, -265px) rotate(2350deg) scale(.3);
+  }
+}
+
+@keyframes correct-up-right {
+  0%{
+    transform: translate(-50%) scale(.7)
+  }
+  100%{
+    transform: translate(-28%, -12%) scale(.6)
+  }
+}
+
+@keyframes incorrect-up-right {
+  0%{
+    transform: translate(-50%) scale(.7)
+  }
+  100%{
+    transform: translate(-26%, -20%) scale(.6)
+  }
+}
+
+@keyframes down-left {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(-185px, -203px) rotate(2350deg) scale(.3);
+  }
+}
+
+@keyframes correct-down-left {
+  0%{
+    transform: translate(-50%) rotateY(180deg) scale(.7)
+  }
+  100%{
+    transform: translate(-67%, -6%) rotateY(180deg) scale(.6)
+  }
+}
+
+@keyframes incorrect-down-left {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(-180px, -163px) rotate(2350deg) scale(.3);
+  }
+}
+
+@keyframes down-right {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(96px, -191px) rotate(2350deg) scale(.3);
+  }
+}
+
+@keyframes correct-down-right {
+  0%{
+    transform: translate(-50%) scale(.7)
+  }
+  100%{
+    transform: translate(-34%, -5%) scale(.6)
+  }
+}
+
+@keyframes incorrect-down-right {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(91px, -159px) rotate(2350deg) scale(.3);
   }
 }

@@ -23,6 +23,19 @@ class Page {
         '/img/emoji.png',
         '/img/metafan.png'
       ]
+    },
+    '3': {
+      images: [
+        '/img/gates.png',
+        '/img/ball_clear.png',
+        '/img/sprite_goalkeeper_stands.png',
+        '/img/sprite_goalkeeper_flys.png',
+        '/img/sprite_goalkeeper_felt.png',
+        '/img/sprite_quiz.png',
+        '/img/emoji.png',
+        '/img/metafan.png',
+        '/img/phones.png'
+      ]
     }
   }
   constructor(step, callback){
@@ -43,7 +56,6 @@ class Page {
     if(im.length > 0){
       const buf = document.querySelector('.buffer');
       for(const i of im){
-        console.log(i);
         const img = document.createElement('img');
         img.src = i;
         img.onload = () => {
@@ -80,6 +92,7 @@ class Quiz {
   goals = 0
   task = 0
   letters = ['A', 'B', 'C', 'D']
+  animation = ['--up-left', '--up-right', '--down-left', '--down-right']
   sec = 30
   obj = [
     {
@@ -93,10 +106,13 @@ class Quiz {
       c: 35
     }
   ]
-  actClasses = ['--quiz-time', '--paused'];
+  actClasses = ['--quiz-time', '--paused', '--correct' , '--incorrect', '--again', ...this.animation];
   messages = ['Правильно, ГооооЛ!', 'Нажаль невірно  <img src="/img/emoji.png">']
   constructor(){
     this.step()
+  }
+  randomAnimation(){
+    return this.animation[Math.floor(Math.random() * this.animation.length)]
   }
   step(task=0){
     if(task === 0){
@@ -126,15 +142,20 @@ class Quiz {
       s.setAttribute('data-item', o.a[i]);      
       q.addEventListener('click', this.result, false);
     });
-    this.startCountdown();
+    setTimeout(() => {
+      this.startCountdown();
+    }, 100)
   }
-  reset(){
+  reset(again=false){
     this.message.innerHTML = '';
     this.stopCountdown();
     this.actClasses.forEach(c => this.qz.classList.remove(c));
     this.qzs.forEach(c => (c.classList.remove('--correct'), c.classList.remove('--incorrect'), c));
     this.qz.classList.remove('--correct');
     this.timer.textContent = this.sec;
+    if(again){
+      this.qz.classList.add('--again');
+    }
   }
   startCountdown(){
     this.qz.classList.add(this.actClasses[0]);
@@ -157,45 +178,53 @@ class Quiz {
     }
   }
   animate(correct=true){
-    let result = 'correct';
-    switch(correct){
-      case true:
-        this.message.innerHTML = this.messages[0];
-        this.qz.classList.add('--correct');
-        break;
-      case false:
-        result = 'incorrect';
-        this.message.innerHTML = this.messages[1];
-        break;
-    }
-    const i = this.qzs[this.correctIndex];
-    i.removeEventListener('click', this.result);
-    const timeout = () => {
-      i.classList.add('--' + result);
-      setTimeout(()=> i.classList.remove('--' + result), 500)
-    }
-    timeout();
-    const interval = setInterval(() => {
-      timeout();
-    }, 1000)
-    setTimeout(()=>{
-      clearInterval(interval);
-      setTimeout(()=>{
+    let result = correct ? 'correct' : 'incorrect';   
+    this.qz.classList.add('--' + result);
+    this.qz.classList.add(this.currentAnimation);
+    setTimeout(() => {      
+      switch(correct){
+        case true:
+          this.message.innerHTML = this.messages[0];
+          this.goals++;
+          break;
+        case false:
+          this.message.innerHTML = this.messages[1];
+          break;
+      }
+      const i = this.qzs[this.correctIndex];
+      i.removeEventListener('click', this.result);    
+      const timeout = () => {
         i.classList.add('--' + result);
+        setTimeout(()=> i.classList.remove('--' + result), 500)
+      }
+      timeout();
+      const interval = setInterval(() => {
+        timeout();
+      }, 1000)
+      setTimeout(()=>{
+        clearInterval(interval);
         setTimeout(()=>{
-          this.nextStep();
-        }, 500)
-      },500)
-    },2000)
+          i.classList.add('--' + result);
+          setTimeout(()=>{
+            this.nextStep();
+          }, 500)
+        },500)
+      },2000)
+    }, 2000)
   }
 
   nextStep(){
-    console.log(this.task);
-    if((this.task + 1) === this.obj.length){
-
-    }else{
-      ++this.task;
-      this.step(this.task);
+    if(this.goals === 3){
+      this.reset();
+      this.qz.classList.add('--done');
+    }
+    else{
+      if((this.task + 1) === this.obj.length){
+        this.reset(true);
+      }else{
+        ++this.task;
+        this.step(this.task);
+      }
     }
   }
 
@@ -207,6 +236,7 @@ class Quiz {
       correctAnswer = quiz.correctAnswer == a;
     }
     quiz.stopCountdown(true);
+    quiz.currentAnimation = quiz.randomAnimation();
     if(!correct || !correctAnswer){
       quiz.animate(false);
     }
@@ -222,7 +252,7 @@ const wrapper = () => document.querySelector('.wrapper');
 const steps = {
   '0': '--splash',
   '1': '--faq',
-  '2':'--quiz'
+  '2': '--quiz'
 }
 
 function resetStep(){
@@ -234,7 +264,7 @@ function nextStep(step){
   resetStep();
   wrapper().classList.add(steps[step]);
   if(step == 2){
-    // quiz = new Quiz();
+    quiz = new Quiz();
   }
 }
 
@@ -242,9 +272,15 @@ function setListeners(){
   [...document.querySelectorAll('[id*="btn-"]')].forEach(b => {
     b.addEventListener('click', (e) => {
       const step = e.target.closest('.btn').getAttribute('id').split('-')[1];
+
       page.init(step, () => nextStep(step));
       page.next();
     }, false);
+  })
+  document.querySelector('#next-btn').addEventListener('click', e => {
+    const t = e.target.closest('.qz');
+    t.classList.remove('--again');
+    t.classList.add('--done');
   })
 }
 
