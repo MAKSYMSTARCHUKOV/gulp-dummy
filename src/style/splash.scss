@@ -4,6 +4,9 @@
       width: 160px;
       top: 35px;
       left: 25px;
+      @include android(){
+        width: 130px;
+      }
     }    
   }
   #info{
@@ -17,10 +20,17 @@
       line-height: 39px;
       font-weight: 400;
       margin-bottom: 11px;
+      @include android(){
+        font-size: 30px;
+        line-height: 29px;
+      }
     }
     span{
       font-size: 16px;
       line-height: 20px;
+      @include android(){
+        font-size: 14px;
+      }
     }
     .btn{
       margin-top: 30px;

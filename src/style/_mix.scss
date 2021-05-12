@@ -17,7 +17,7 @@
 }
 
 @mixin android(){
-  @media screen and (min-width: 360px) {
+  @media screen and (max-width: 370px) and (max-height: 600px) {
     @content;
   }
 }
@@ -27,6 +27,18 @@
 //     @content;
 //   }
 // }
+
+@mixin iphoneX(){
+  @media screen and (min-width: 375px) and (min-height: 800px) {
+    @content;
+  }
+}
+
+@mixin iphoneXS(){
+  @media screen and (min-width: 375px) and (min-height: 860px) {
+    @content;
+  }
+}
 
 @mixin iphone(){
   @media screen and (min-width: 375px) and (min-height: 690px) {

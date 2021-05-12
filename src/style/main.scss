@@ -3,6 +3,7 @@
 @import 'splash';
 @import 'faq';
 @import 'quiz';
+@import 'lights';
 
 
 .wrapper{
@@ -26,8 +27,14 @@
       opacity: 1;
       visibility: visible;
     }
+  }&.--lights{
+    .lg{
+      display: flex;
+      opacity: 1;
+      visibility: visible;
+    }
   }
-  .fq, .qz, .sp{
+  .fq, .qz, .sp, .lg{
     opacity: 0;
     visibility: hidden;  
     transition: visibility 0s linear, opacity .2s linear;

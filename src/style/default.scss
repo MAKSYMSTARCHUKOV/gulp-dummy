@@ -6,7 +6,7 @@
 }
 
 html, body, .fullscreen{
-  min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
   width: 100%;
   overflow: hidden;
 }
@@ -34,6 +34,7 @@ h2{
 }
 
 .btn{
+  user-select: none;
   -webkit-tap-highlight-color: transparent;
   background-image: url(/img/sprite_buttons.png);
   cursor: pointer;
@@ -45,6 +46,12 @@ h2{
   text-align: center;
   background-position: center top;
   background-repeat: no-repeat;
+  @include android(){
+    background-image: url(/img/sprite_buttons_min.png);
+    height: 36px;
+    line-height: 36px;
+    font-size: 19px;
+  }
 }
 
 .btn-quiz{

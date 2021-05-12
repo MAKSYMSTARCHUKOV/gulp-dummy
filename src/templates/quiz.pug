@@ -1,5 +1,6 @@
 .qz.fullscreen.abs
   img#logo.abs(src="img/logo.svg" alt="First")
+  .btn.abs#btn-3
   .banner
     .timer
       .left
@@ -70,12 +71,12 @@
       .
         ними для розіграшу.
     form(name="register")
-      .input
+      .input#name
         img(src="img/name.svg" alt="Name")
-        input(type="text" name="name"  placeholder="Ім'я")
+        input(type="text" name="name" autocomplete="off" placeholder="Ім'я")
       .input
         img(src="img/message.svg" alt="Email")
-        input(type="text" name="email" placeholder="Email")
+        input(type="text" name="email" autocomplete="off" placeholder="Email")
       label
         input(type="checkbox" name="mature" hidden)
         .round
@@ -84,4 +85,4 @@
           br
           .
             на обробку персональних даних.
-    .btn#btn-3 Зареєструватись
+    .btn#submit(data-disabled="true") Зареєструватись

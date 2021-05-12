@@ -4,6 +4,9 @@
   align-items: center;
   padding: 16px 0 33px;
   position: relative;
+  @include android(){
+    padding-top: 8px;
+  }
   img{
     &#logo{
       z-index: 2;
@@ -11,6 +14,11 @@
       top: 18px;
       left: 23px;
     }
+  }
+  #btn-3{
+    width: 1px;
+    height: 1px;
+    top: -1px;
   }
   .banner{
     display: flex;
@@ -23,6 +31,10 @@
       align-items: center;
       margin-bottom: -8px;
       margin-right: 13px;
+      @include android(){
+        margin-bottom: -9px;
+        margin-right: 21px;
+      }
       .left{
         display: flex;
         flex-direction: column;
@@ -52,6 +64,9 @@
               stroke: #73B900;
               stroke-dasharray: 200;
               stroke-dashoffset: 0;
+              @include android(){
+                stroke-width: 6px;
+              }
             }
           }
           circle{
@@ -62,6 +77,9 @@
             stroke-width: 10px;
             stroke: white;
             stroke-linecap: round;
+            @include android(){
+              stroke-width: 8px;
+            }
           }
         }
         .sec{
@@ -91,6 +109,7 @@
       height: 92px;
       background-position: center top;
       background-image: url(/img/sprite_questions.png);
+      background-repeat: no-repeat;
       display: flex;
       text-align: center;
       align-items: center;
@@ -98,6 +117,13 @@
       line-height: 22px;
       color: $yellow;
       padding: 0 30px;
+      @include android(){
+        height: 72px;
+        background-image: url(/img/sprite_questions_min.png);
+        padding: 0 39px;
+        font-size: 17px;
+        line-height: 20px;
+      }
     }
     .metafan{
       z-index: 1;
@@ -114,18 +140,39 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    @include android(){
+      bottom: 20px;
+    }
     .game{
-      height: 360px;
+      height: 246px;
       margin-bottom: -43px;
       position: relative;
+      @include android(){
+        height: 210px;
+      }
+      @include iphoneX {
+        height: 317px;
+      }
+      @include iphoneXS {
+        height: 360px;
+      }
       .goalkeeper{
-        width: 186px;
-        height: 300px;        
+        width: 145px;
+        height: 359px;        
         @include hCenter;
         transform: translateX(-50%) scale(0.7);
         perspective: 1000px;
         transform-style: preserve-3d;
-        top: -18px;
+        top: -83px;
+        @include android(){
+          width: 128px;
+          height: 340px;
+        }
+        @include iphoneX {
+          width: 186px;
+          height: 300px;          
+          top: -18px;        
+        }
         .picture{
           width: 100%;
           height: 100%;
@@ -146,16 +193,32 @@
         left: 50%;
         transform: translateX(-40%);
         z-index: 1;
+        @include android(){
+          bottom: -2px;
+        }
       }
       img{
         &.gates{
-          width: 368px;
+          width: 310px;
+          @include android(){
+            width: 282px;
+          }
+          @include iphoneX {
+            width: 368px;
+          }
         }
         &.ball, &.ball-clear{
-          width: 85px;
+          width: 54px;
           bottom: 17px;
+          @include android(){
+            width: 45px;
+            bottom: 8px;
+          }
           @include hCenter;
           z-index: 2;
+          @include iphoneX {
+            width: 85px;
+          }
         }
         &.ball-clear{
           display: none;
@@ -166,7 +229,6 @@
       width: 100%;
       display: flex;
       flex-direction: column;
-      row-gap: 10px;
       &-result{
         display: flex;
         align-items: center;
@@ -184,26 +246,50 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 59px;
+        height: 36px;
         width: 100%;
-        background-size: 1 59px;
+        background-size: 1 36px;
         background-position: center top;
         background-repeat: no-repeat;
-        background-image: url(/img/sprite_quiz.png);
+        background-image: url(/img/sprite_quiz_min.png);
+        margin-top: 10px;
+        @include android(){
+          background-image: url(/img/sprite_quiz_tiny.png);
+        }
+        @include iphoneX {
+          height: 59px;
+          background-size: 1 59px;
+          background-image: url(/img/sprite_quiz.png);
+        }
         span{
           display: inline-block;
           width: 263px;
-          font-size: 29.4677px;
+          font-size: 20.4677px;
           color: $yellow;
+          white-space: nowrap;
+          overflow-x: hidden;
+          text-overflow: ellipsis;
+          @include android(){
+            width: 245px;
+          }
+          @include iphoneX {
+            font-size: 21.4677px;
+          }
         }
         &.--correct{
-          background-position-y: -59px * 2;
+          background-position-y: -36px * 2;
+          @include iphoneX {
+            background-position-y: -59px * 2;
+          }
           span{
             color: $blue;
           }
         }
         &.--incorrect{
-          background-position-y: -59px;
+          background-position-y: -36px;
+          @include iphoneX {            
+            background-position-y: -59px;
+          }
           span{
             color: white;
           }
@@ -227,11 +313,15 @@
     img{
       &#metafan{
         width: 100%;
-        top: -152px;
+        top: -100px;
       }
       &#phones{
         margin-top: auto;
         margin-bottom: 36px;
+        width: 240px;
+        @include iphoneX {
+          width: auto;
+        }
       }
     }
     h2{
@@ -240,7 +330,15 @@
       font-size: 38px;
       line-height: 40px;
       text-align: center;
-      margin-top: 176px;
+      margin-top: 124px;   
+      @include android(){
+        font-size: 30px;
+        line-height: 30px;
+        margin-top: 94px; 
+      }
+      @include iphoneXS {
+        margin-top: 176px;        
+      }
     }
     span{
       margin-top: 18px;
@@ -253,6 +351,9 @@
         background-position-y: -59px;
         color: $blue;
         margin-bottom: 5px;
+        @include android(){
+          background-position-y: -36px;
+        }
       }
     }
   }
@@ -290,16 +391,25 @@
           }
         }
         .goalkeeper{
-          width: 329px;
-          height: 339px;       
+          width: 288px;
+          height: 298px;       
           @include hCenter;
           perspective: none;
           transform-style: flat;
-          top: -18px;
+          top: -83px;
           transition-property: width, height;
           transition-duration: 0s;
           transition-delay: .5s;
           transform: translateX(-50%) scale(0.7);
+          @include android(){
+            width: 267px;
+            height: 265px;       
+          }
+          @include iphoneX {
+            width: 329px;
+            height: 339px;
+            top: -18px;       
+          }
           .picture{
             width: 100%;
             height: 100%;
@@ -341,13 +451,38 @@
             img{
               &.ball-clear{
                 display: block;
-                animation: $p 2s ease-out forwards;
+                animation-name: $p;
+                animation-duration: 2s;
+                animation-timing-function: ease-out;
+                animation-fill-mode: forwards;
+                @include android(){
+                  animation-name: #{$p}-android;
+                }
+                @include iphoneX(){
+                  animation-name: #{$p}-iphoneX;
+                }
+                @include iphoneXS(){
+                  animation-name: #{$p}-iphoneXS;
+                }
               }
             }
           }
           .game{              
             .goalkeeper{
-              animation: correct-#{$p} 1.5s .5s ease-out forwards;
+              animation-name: correct-#{$p};
+              animation-duration: 1.5s;
+              animation-delay: .5s;
+              animation-timing-function: ease-out;
+              animation-fill-mode: forwards;
+              @include android(){
+                animation-name: correct-#{$p}-android;
+              }
+              @include iphoneX(){
+                animation-name: correct-#{$p}-iphoneX;
+              }
+              @include iphoneXS(){
+                animation-name: correct-#{$p}-iphoneXS;
+              }
             }
           }
         }  
@@ -363,13 +498,38 @@
             img{
               &.ball-clear{
                 display: block;
-                animation: $p 2s ease-out forwards;
+                animation-name: $p;
+                animation-duration: 2s;
+                animation-timing-function: ease-out;
+                animation-fill-mode: forwards;
+                @include android(){
+                  animation-name: #{$p}-android;
+                }
+                @include iphoneX(){
+                  animation-name: #{$p}-iphoneX;
+                }
+                @include iphoneXS(){
+                  animation-name: #{$p}-iphoneXS;
+                }
               }
             }
           }
           .game{              
             .goalkeeper{
-              animation: incorrect-#{$p} 1.5s .5s ease-out forwards;
+              animation-name: incorrect-#{$p};
+              animation-duration: 1.5s;
+              animation-delay: .5s;
+              animation-timing-function: ease-out;
+              animation-fill-mode: forwards;
+              @include android(){
+                animation-name: incorrect-#{$p}-android;
+              }
+              @include iphoneX(){
+                animation-name: incorrect-#{$p}-iphoneX;
+              }
+              @include iphoneXS(){
+                animation-name: incorrect-#{$p}-iphoneXS;
+              }
             }
           }
         }  
@@ -380,13 +540,38 @@
             img{
               &.ball-clear{
                 display: block;
-                animation: incorrect-#{$p} 2s ease-out forwards;
+                animation-name: incorrect-#{$p};
+                animation-duration: 2s;
+                animation-timing-function: ease-out;
+                animation-fill-mode: forwards;
+                @include android(){
+                  animation-name: incorrect-#{$p}-android;
+                }
+                @include iphoneX(){
+                  animation-name: incorrect-#{$p}-iphoneX;
+                }
+                @include iphoneXS(){
+                  animation-name: incorrect-#{$p}-iphoneXS;
+                }
               }
             }
           }
           .game{              
             .goalkeeper{
-              animation: correct-#{$p} 1.5s .5s ease-out forwards;
+              animation-name: correct-#{$p};
+              animation-duration: 1.5s;
+              animation-delay: .5s;
+              animation-timing-function: ease-out;
+              animation-fill-mode: forwards;
+              @include android(){
+                animation-name: correct-#{$p}-android;
+              }
+              @include iphoneX(){
+                animation-name: correct-#{$p}-iphoneX;
+              }
+              @include iphoneXS(){
+                animation-name: correct-#{$p}-iphoneXS;
+              }
             }
           }
         }  
@@ -398,8 +583,15 @@
       &#logo{
         position: relative;
         left: unset;
-        width: 216px;
-        top: 53px;
+        width: 182px;
+        top: 19px;
+        @include android(){
+          width: 153px;
+        }
+        @include iphoneXS {
+          width: 216px;
+          top: 53px;
+        }
       }
     }
     .banner{
@@ -445,8 +637,105 @@
       &.final{
         opacity: 1;
         visibility: visible;
+        h2 ~ span{
+          @include android(){
+            margin-top: 14px;
+            font-size: 16px;
+            line-height: 22px;
+          }
+        }
         form{
           margin-top: auto;
+          width: 100%;
+          padding: 0 24px;
+          .input{
+            display: flex;
+            align-items: center;
+            padding: 0 35px;
+            width: 100%;
+            height: 35px;
+            background-image: url(/img/input.png);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            @include iphoneX {
+              height: 64px;
+            }
+            &#name{
+              margin-bottom: 9px;
+            }
+            &.error{
+              filter: drop-shadow(0px 0px 2px rgb(255, 62, 62));
+            }
+            img{
+              height: 20px;
+              margin-right: 8px;
+            }
+            input{
+              flex-grow: 1;
+              font-size: 14px;
+              color: #65656B;
+              border: 0;
+              outline: none;
+              background-color: transparent;
+              &::placeholder{
+                font-family: 'Cera Pro Bold';
+                font-size: 14px;
+                color: #65656B;
+              }
+              &:focus{
+                border: 0;
+                outline: none;
+              }
+            }
+          }
+          label{
+            margin: 15px 0 20px;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            @include iphoneX {              
+              margin: 22px 0 30px;
+              padding: 0 20px;
+            }
+            .round{
+              background-color: $blue;
+              display: flex;
+              width: 20px;
+              height: 20px;
+              border-radius: 20px;
+              align-items: center;
+              justify-content: center;
+              padding: 6px;
+              margin-right: 10px;
+              img{
+                opacity: 0;
+                width: 100%;
+              }
+            }
+            input:checked~.round{
+              img{
+                opacity: 1;
+              }
+            }
+            span{
+              font-size: 12px;
+              line-height: 13px;
+              margin-top: 0;
+              text-align: left;
+            }
+          }
+        }
+        .btn{
+          &#submit{
+            &[data-disabled]{
+              pointer-events: none;
+              background-position-y: -59px * 2;
+              color: darkgray;
+              @include android(){
+                background-position-y: -36px * 2;
+              }
+            }
+          }
         }
       }
     }
@@ -507,7 +796,7 @@
     transform: translateX(-50%) rotate(0deg) scale(1);
   }
   100%{
-    transform: translate(-176px, -265px) rotate(2350deg) scale(.3);
+    transform: translate(-146px, -180px) rotate(2350deg) scale(.3);
   }
 }
 
@@ -516,7 +805,7 @@
     transform: translate(-50%) rotateY(180deg) scale(.7)
   }
   100%{
-    transform: translate(-69%, -12%) rotateY(180deg) scale(.6)
+    transform: translate(-73%, 6%) rotateY(180deg) scale(.6);
   }
 }
 
@@ -525,7 +814,7 @@
     transform: translate(-50%) rotateY(180deg) scale(.7)
   }
   100%{
-    transform: translate(-73%, -21%) rotateY(180deg) scale(.6)
+    transform: translate(-73%, -1%) rotateY(180deg) scale(.6);
   }
 }
 
@@ -534,7 +823,7 @@
     transform: translateX(-50%) rotate(0deg) scale(1);
   }
   100%{
-    transform: translate(96px, -265px) rotate(2350deg) scale(.3);
+    transform: translate(93px, -181px) rotate(2350deg) scale(.3);
   }
 }
 
@@ -543,7 +832,7 @@
     transform: translate(-50%) scale(.7)
   }
   100%{
-    transform: translate(-28%, -12%) scale(.6)
+    transform: translate(-28%, 6%) scale(.6);
   }
 }
 
@@ -552,7 +841,7 @@
     transform: translate(-50%) scale(.7)
   }
   100%{
-    transform: translate(-26%, -20%) scale(.6)
+    transform: translate(-26%, -1%) scale(.6);
   }
 }
 
@@ -561,7 +850,7 @@
     transform: translateX(-50%) rotate(0deg) scale(1);
   }
   100%{
-    transform: translate(-185px, -203px) rotate(2350deg) scale(.3);
+    transform: translate(-148px, -155px) rotate(2350deg) scale(.3);
   }
 }
 
@@ -570,7 +859,7 @@
     transform: translate(-50%) rotateY(180deg) scale(.7)
   }
   100%{
-    transform: translate(-67%, -6%) rotateY(180deg) scale(.6)
+    transform: translate(-66%, 0%) rotateY(180deg) scale(.6);
   }
 }
 
@@ -579,7 +868,7 @@
     transform: translateX(-50%) rotate(0deg) scale(1);
   }
   100%{
-    transform: translate(-180px, -163px) rotate(2350deg) scale(.3);
+    transform: translate(-144px, -126px) rotate(2350deg) scale(.3);
   }
 }
 
@@ -588,7 +877,7 @@
     transform: translateX(-50%) rotate(0deg) scale(1);
   }
   100%{
-    transform: translate(96px, -191px) rotate(2350deg) scale(.3);
+    transform: translate(96px, -145px) rotate(2350deg) scale(.3);
   }
 }
 
@@ -597,7 +886,7 @@
     transform: translate(-50%) scale(.7)
   }
   100%{
-    transform: translate(-34%, -5%) scale(.6)
+    transform: translate(-34%, 5%) scale(.6);
   }
 }
 
@@ -606,6 +895,337 @@
     transform: translateX(-50%) rotate(0deg) scale(1);
   }
   100%{
+    transform: translate(91px, -113px) rotate(2350deg) scale(.3);
+  }
+}
+
+// android
+
+@keyframes up-left-android {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(-129px, -158px) rotate(2350deg) scale(.35);
+  }
+}
+
+@keyframes correct-up-left-android {
+  0%{
+    transform: translate(-50%) rotateY(180deg) scale(.7)
+  }
+  100%{
+    transform: translate(-73%, 10%) rotateY(180deg) scale(.6);
+  }
+}
+
+@keyframes incorrect-up-left-android {
+  0%{
+    transform: translate(-50%) rotateY(180deg) scale(.7)
+  }
+  100%{
+    transform: translate(-73%, 4%) rotateY(180deg) scale(.6);
+  }
+}
+
+@keyframes up-right-android {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(87px, -162px) rotate(2350deg) scale(.35);
+  }
+}
+
+@keyframes correct-up-right-android {
+  0%{
+    transform: translate(-50%) scale(.7)
+  }
+  100%{
+    transform: translate(-28%, 8%) scale(.6);
+  }
+}
+
+@keyframes incorrect-up-right-android {
+  0%{
+    transform: translate(-50%) scale(.7)
+  }
+  100%{
+    transform: translate(-26%, 2%) scale(.6);
+  }
+}
+
+@keyframes down-left-android {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(-134px, -119px) rotate(2350deg) scale(.35);
+  }
+}
+
+@keyframes correct-down-left-android {
+  0%{
+    transform: translate(-50%) rotateY(180deg) scale(.7)
+  }
+  100%{
+    transform: translate(-66%, 14%) rotateY(180deg) scale(.6);
+  }
+}
+
+@keyframes incorrect-down-left-android {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(-134px, -86px) rotate(2350deg) scale(.35);
+  }
+}
+
+@keyframes down-right-android {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(88px,-116px) rotate(2350deg) scale(.35);
+  }
+}
+
+@keyframes correct-down-right-android{
+  0%{
+    transform: translate(-50%) scale(.7)
+  }
+  100%{
+    transform: translate(-34%, 15%) scale(.6);
+  }
+}
+
+@keyframes incorrect-down-right-android {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(90px,-83px) rotate(2350deg) scale(.35);
+  }
+}
+
+//iphoneX
+
+@keyframes up-left-iphoneX {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(-179px, -227px) rotate(2350deg) scale(.3);
+  }
+}
+
+@keyframes correct-up-left-iphoneX {
+  0%{
+    transform: translate(-50%) rotateY(180deg) scale(.7)
+  }
+  100%{
+    transform: translate(-69%, -12%) rotateY(180deg) scale(.6);
+  }
+}
+
+@keyframes incorrect-up-left-iphoneX {
+  0%{
+    transform: translate(-50%) rotateY(180deg) scale(.7)
+  }
+  100%{
+    transform: translate(-73%, -22%) rotateY(180deg) scale(.6);
+  }
+}
+
+@keyframes up-right-iphoneX {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(96px, -223px) rotate(2350deg) scale(.3);
+  }
+}
+
+@keyframes correct-up-right-iphoneX {
+  0%{
+    transform: translate(-50%) scale(.7)
+  }
+  100%{
+    transform: translate(-29%, -14%) scale(.6);
+  }
+}
+
+@keyframes incorrect-up-right-iphoneX {
+  0%{
+    transform: translate(-50%) scale(.7)
+  }
+  100%{
+    transform: translate(-26%, -20%) scale(.6);
+  }
+}
+
+@keyframes down-left-iphoneX {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(-185px, -156px) rotate(2350deg) scale(.3);
+  }
+}
+
+@keyframes correct-down-left-iphoneX {
+  0%{
+    transform: translate(-50%) rotateY(180deg) scale(.7)
+  }
+  100%{
+    transform: translate(-67%, -6%) rotateY(180deg) scale(.6);
+  }
+}
+
+@keyframes incorrect-down-left-iphoneX {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(-180px, -119px) rotate(2350deg) scale(.3);
+  }
+}
+
+@keyframes down-right-iphoneX {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(96px, -158px) rotate(2350deg) scale(.3);
+  }
+}
+
+@keyframes correct-down-right-iphoneX {
+  0%{
+    transform: translate(-50%) scale(.7)
+  }
+  100%{
+    transform: translate(-34%, -5%) scale(.6);
+  }
+}
+
+@keyframes incorrect-down-right-iphoneX {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(91px, -115px) rotate(2350deg) scale(.3);
+  }
+}
+
+// iphoneXS
+
+@keyframes up-left-iphoneXS {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(-176px, -265px) rotate(2350deg) scale(.3);
+  }
+}
+
+@keyframes correct-up-left-iphoneXS {
+  0%{
+    transform: translate(-50%) rotateY(180deg) scale(.7)
+  }
+  100%{
+    transform: translate(-69%, -12%) rotateY(180deg) scale(.6);
+  }
+}
+
+@keyframes incorrect-up-left-iphoneXS {
+  0%{
+    transform: translate(-50%) rotateY(180deg) scale(.7)
+  }
+  100%{
+    transform: translate(-73%, -21%) rotateY(180deg) scale(.6);
+  }
+}
+
+@keyframes up-right-iphoneXS {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(96px, -265px) rotate(2350deg) scale(.3);
+  }
+}
+
+@keyframes correct-up-right-iphoneXS {
+  0%{
+    transform: translate(-50%) scale(.7)
+  }
+  100%{
+    transform: translate(-33%, 4%) scale(.6);
+  }
+}
+
+@keyframes incorrect-up-right-iphoneXS {
+  0%{
+    transform: translate(-50%) scale(.7)
+  }
+  100%{
+    transform: translate(-26%, -20%) scale(.6);
+  }
+}
+
+@keyframes down-left-iphoneXS {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(-185px, -203px) rotate(2350deg) scale(.3);
+  }
+}
+
+@keyframes correct-down-left-iphoneXS {
+  0%{
+    transform: translate(-50%) rotateY(180deg) scale(.7)
+  }
+  100%{
+    transform: translate(-67%, -6%) rotateY(180deg) scale(.6);
+  }
+}
+
+@keyframes incorrect-down-left-iphoneXS {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(-180px, -163px) rotate(2350deg) scale(.3);
+  }
+}
+
+@keyframes down-right-iphoneXS {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(96px, -191px) rotate(2350deg) scale(.3);
+  }
+}
+
+@keyframes correct-down-right-iphoneXS {
+  0%{
+    transform: translate(-50%) scale(.7)
+  }
+  100%{
+    transform: translate(-34%, -5%) scale(.6);
+  }
+}
+
+@keyframes incorrect-down-right-iphoneXS {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
     transform: translate(91px, -159px) rotate(2350deg) scale(.3);
   }
 }
+
