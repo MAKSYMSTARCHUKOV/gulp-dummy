@@ -1,0 +1,1231 @@
+.qz{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 0 33px;
+  position: relative;
+  @include android(){
+    padding-top: 8px;
+  }
+  img{
+    &#logo{
+      z-index: 2;
+      width: 82px;
+      top: 18px;
+      left: 23px;
+    }
+  }
+  #btn-3{
+    width: 1px;
+    height: 1px;
+    top: -1px;
+  }
+  .banner{
+    display: flex;
+    flex-direction: column;
+    width: 322px;
+    .timer{
+      z-index: 2;
+      align-self: flex-end;
+      display: flex;
+      align-items: center;
+      margin-bottom: -8px;
+      margin-right: 13px;
+      @include android(){
+        margin-bottom: -9px;
+        margin-right: 21px;
+      }
+      .left{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        font-size: 20px;
+        font-family: 'Cera Pro Bold';
+        margin-right: 12px;
+        .questions{
+          margin-top: -7px;
+          display: flex;
+          justify-content: flex-end;
+        }
+      }
+      .loader{
+        $radius: 80px;
+        position: relative;
+        width: $radius;
+        height: $radius;
+        svg{
+          @include aCenter;
+          width: $radius;
+          height: $radius;
+          &#progress {
+            transform: translate(-50%, -50%) rotateY(180deg) rotateZ(-90deg);
+            circle{
+              stroke-width: 8px;
+              stroke: #73B900;
+              stroke-dasharray: 200;
+              stroke-dashoffset: 0;
+              @include android(){
+                stroke-width: 6px;
+              }
+            }
+          }
+          circle{
+            transform: translate(8px, 8px);
+            width: 100%;
+            height: 100%;
+            fill: none;
+            stroke-width: 10px;
+            stroke: white;
+            stroke-linecap: round;
+            @include android(){
+              stroke-width: 8px;
+            }
+          }
+        }
+        .sec{
+          @include aCenter;
+          width: $radius;
+          height: $radius;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          margin-top: -3px;
+          span{
+            font-size: 9.89091px;
+            &:last-child{
+              margin-top: -6px;
+            }
+            &#sec{
+              font-size: 23.9416px;
+            }
+          }
+        }
+      }
+    }
+    .task{
+      z-index: 2;
+      width: 100%;
+      height: 92px;
+      background-position: center top;
+      background-image: url(/img/sprite_questions.png);
+      background-repeat: no-repeat;
+      display: flex;
+      text-align: center;
+      align-items: center;
+      font-size: 21px;
+      line-height: 22px;
+      color: $yellow;
+      padding: 0 30px;
+      @include android(){
+        height: 72px;
+        background-image: url(/img/sprite_questions_min.png);
+        padding: 0 39px;
+        font-size: 17px;
+        line-height: 20px;
+      }
+    }
+    .metafan{
+      z-index: 1;
+      width: 100%;
+      left: 0;
+      top: 88px;
+      transform: translateY(-77px);
+      opacity: 0;
+    }
+  }  
+  .game-zone{
+    width: 100%;
+    bottom: 33px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @include android(){
+      bottom: 20px;
+    }
+    .game{
+      height: 246px;
+      margin-bottom: -43px;
+      position: relative;
+      @include android(){
+        height: 210px;
+      }
+      @include iphoneX {
+        height: 317px;
+      }
+      @include iphoneXS {
+        height: 360px;
+      }
+      .goalkeeper{
+        width: 145px;
+        height: 359px;        
+        @include hCenter;
+        transform: translateX(-50%) scale(0.7);
+        perspective: 1000px;
+        transform-style: preserve-3d;
+        top: -83px;
+        @include android(){
+          width: 128px;
+          height: 340px;
+        }
+        @include iphoneX {
+          width: 186px;
+          height: 300px;          
+          top: -18px;        
+        }
+        .picture{
+          width: 100%;
+          height: 100%;
+          background-repeat: no-repeat;
+          background-position: left center;
+          background-size: contain;
+          background-image: url(/img/sprite_goalkeeper_stands.png);
+          animation: g-stands 2s ease-in-out infinite alternate;
+        }
+      }
+      .shadow{
+        background: radial-gradient(50% 50% at 50% 50%,#3F3F3F 0,rgba(196,196,196,0) 100%);
+        mix-blend-mode: multiply;
+        position: absolute;
+        width: 100px;
+        height: 30px;
+        bottom: 5px;
+        left: 50%;
+        transform: translateX(-40%);
+        z-index: 1;
+        @include android(){
+          bottom: -2px;
+        }
+      }
+      img{
+        &.gates{
+          width: 310px;
+          @include android(){
+            width: 282px;
+          }
+          @include iphoneX {
+            width: 368px;
+          }
+        }
+        &.ball, &.ball-clear{
+          width: 54px;
+          bottom: 17px;
+          @include android(){
+            width: 45px;
+            bottom: 8px;
+          }
+          @include hCenter;
+          z-index: 2;
+          @include iphoneX {
+            width: 85px;
+          }
+        }
+        &.ball-clear{
+          display: none;
+        }
+      }
+    }
+    .quiz{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      &-result{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 29.4677px;
+        text-shadow: 2px 1px 1px rgba(0, 0, 0, 0.46);
+        height: 38px;
+        img{
+          width: 24px;
+          height: 24px;
+          margin-left: 10px;
+        }
+      }
+      &-item{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 36px;
+        width: 100%;
+        background-size: 1 36px;
+        background-position: center top;
+        background-repeat: no-repeat;
+        background-image: url(/img/sprite_quiz_min.png);
+        margin-top: 10px;
+        @include android(){
+          background-image: url(/img/sprite_quiz_tiny.png);
+        }
+        @include iphoneX {
+          height: 59px;
+          background-size: 1 59px;
+          background-image: url(/img/sprite_quiz.png);
+        }
+        span{
+          display: inline-block;
+          width: 263px;
+          font-size: 20.4677px;
+          color: $yellow;
+          white-space: nowrap;
+          overflow-x: hidden;
+          text-overflow: ellipsis;
+          @include android(){
+            width: 245px;
+          }
+          @include iphoneX {
+            font-size: 21.4677px;
+          }
+        }
+        &.--correct{
+          background-position-y: -36px * 2;
+          @include iphoneX {
+            background-position-y: -59px * 2;
+          }
+          span{
+            color: $blue;
+          }
+        }
+        &.--incorrect{
+          background-position-y: -36px;
+          @include iphoneX {            
+            background-position-y: -59px;
+          }
+          span{
+            color: white;
+          }
+        }
+      }
+    }
+  }
+  .done{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    opacity: 0;
+    visibility: hidden;
+    background-color: rgba(#222232, .95);
+    align-items: center;
+    padding: 55px 0 33px;
+    transition: visibility 0s .25s linear, opacity .2s linear;
+    img{
+      &#metafan{
+        width: 100%;
+        top: -100px;
+      }
+      &#phones{
+        margin-top: auto;
+        margin-bottom: 36px;
+        width: 240px;
+        @include iphoneX {
+          width: auto;
+        }
+      }
+    }
+    h2{
+      color: $yellow;
+      font-family: 'Cera Pro Bold';
+      font-size: 38px;
+      line-height: 40px;
+      text-align: center;
+      margin-top: 124px;   
+      @include android(){
+        font-size: 30px;
+        line-height: 30px;
+        margin-top: 94px; 
+      }
+      @include iphoneXS {
+        margin-top: 176px;        
+      }
+    }
+    span{
+      margin-top: 18px;
+      font-size: 22px;
+      line-height: 28px;
+      text-align: center;
+    }
+    .btn{
+      &#btn-2{
+        background-position-y: -59px;
+        color: $blue;
+        margin-bottom: 5px;
+        @include android(){
+          background-position-y: -36px;
+        }
+      }
+    }
+  }
+  &.--quiz-time{
+    .banner{
+      .loader{
+        svg{
+          &#progress{
+            circle{
+              animation: flow 30s linear forwards;
+            }
+          }
+        }
+      }
+    }
+    &.--paused{
+      .banner{
+        .loader{
+          svg{
+            &#progress{
+              circle{
+                animation-play-state: paused;
+              }
+            }
+          }
+        }
+      }  
+    }
+    $pos: up-left, up-right, down-left, down-right;
+    &.--correct,  &.--incorrect{
+      .game{
+        img{
+          &.ball{
+            display: none;
+          }
+        }
+        .goalkeeper{
+          width: 288px;
+          height: 298px;       
+          @include hCenter;
+          perspective: none;
+          transform-style: flat;
+          top: -83px;
+          transition-property: width, height;
+          transition-duration: 0s;
+          transition-delay: .5s;
+          transform: translateX(-50%) scale(0.7);
+          @include android(){
+            width: 267px;
+            height: 265px;       
+          }
+          @include iphoneX {
+            width: 329px;
+            height: 339px;
+            top: -18px;       
+          }
+          .picture{
+            width: 100%;
+            height: 100%;
+            background-repeat: no-repeat;
+            background-position: left center;
+            background-image: url(/img/sprite_goalkeeper_flys.png);
+            transition-property: background-image;
+            transition-duration: 0s;
+            transition-delay: .5s;
+            animation:none;
+          }
+        }
+        .shadow{
+          display: none;
+        }
+      }
+      
+      &.--down-left, &.--down-right{
+        .game{
+          .goalkeeper{
+            .picture{
+              background-image: url(/img/sprite_goalkeeper_felt.png);
+            }
+          }
+        }
+      }
+    } 
+    &.--correct{
+      .banner{
+        img{
+          &.metafan{
+            animation: metafan 2s 1.8s cubic-bezier(0.455, 0.03, 0.515, 0.955) forwards;
+          }
+        }
+      }
+      @each $p in $pos {
+        &.--#{$p}{
+          .game{
+            img{
+              &.ball-clear{
+                display: block;
+                animation-name: $p;
+                animation-duration: 2s;
+                animation-timing-function: ease-out;
+                animation-fill-mode: forwards;
+                @include android(){
+                  animation-name: #{$p}-android;
+                }
+                @include iphoneX(){
+                  animation-name: #{$p}-iphoneX;
+                }
+                @include iphoneXS(){
+                  animation-name: #{$p}-iphoneXS;
+                }
+              }
+            }
+          }
+          .game{              
+            .goalkeeper{
+              animation-name: correct-#{$p};
+              animation-duration: 1.5s;
+              animation-delay: .5s;
+              animation-timing-function: ease-out;
+              animation-fill-mode: forwards;
+              @include android(){
+                animation-name: correct-#{$p}-android;
+              }
+              @include iphoneX(){
+                animation-name: correct-#{$p}-iphoneX;
+              }
+              @include iphoneXS(){
+                animation-name: correct-#{$p}-iphoneXS;
+              }
+            }
+          }
+        }  
+      }
+    }
+
+    &.--incorrect{
+      $pos: up-left, up-right;
+      $pos-down: down-left, down-right;
+      @each $p in $pos {
+        &.--#{$p}{
+          .game{
+            img{
+              &.ball-clear{
+                display: block;
+                animation-name: $p;
+                animation-duration: 2s;
+                animation-timing-function: ease-out;
+                animation-fill-mode: forwards;
+                @include android(){
+                  animation-name: #{$p}-android;
+                }
+                @include iphoneX(){
+                  animation-name: #{$p}-iphoneX;
+                }
+                @include iphoneXS(){
+                  animation-name: #{$p}-iphoneXS;
+                }
+              }
+            }
+          }
+          .game{              
+            .goalkeeper{
+              animation-name: incorrect-#{$p};
+              animation-duration: 1.5s;
+              animation-delay: .5s;
+              animation-timing-function: ease-out;
+              animation-fill-mode: forwards;
+              @include android(){
+                animation-name: incorrect-#{$p}-android;
+              }
+              @include iphoneX(){
+                animation-name: incorrect-#{$p}-iphoneX;
+              }
+              @include iphoneXS(){
+                animation-name: incorrect-#{$p}-iphoneXS;
+              }
+            }
+          }
+        }  
+      }
+      @each $p in $pos-down {
+        &.--#{$p}{
+          .game{
+            img{
+              &.ball-clear{
+                display: block;
+                animation-name: incorrect-#{$p};
+                animation-duration: 2s;
+                animation-timing-function: ease-out;
+                animation-fill-mode: forwards;
+                @include android(){
+                  animation-name: incorrect-#{$p}-android;
+                }
+                @include iphoneX(){
+                  animation-name: incorrect-#{$p}-iphoneX;
+                }
+                @include iphoneXS(){
+                  animation-name: incorrect-#{$p}-iphoneXS;
+                }
+              }
+            }
+          }
+          .game{              
+            .goalkeeper{
+              animation-name: correct-#{$p};
+              animation-duration: 1.5s;
+              animation-delay: .5s;
+              animation-timing-function: ease-out;
+              animation-fill-mode: forwards;
+              @include android(){
+                animation-name: correct-#{$p}-android;
+              }
+              @include iphoneX(){
+                animation-name: correct-#{$p}-iphoneX;
+              }
+              @include iphoneXS(){
+                animation-name: correct-#{$p}-iphoneXS;
+              }
+            }
+          }
+        }  
+      }
+    }
+  }
+  &.--again, &.--done{
+    img{
+      &#logo{
+        position: relative;
+        left: unset;
+        width: 182px;
+        top: 19px;
+        @include android(){
+          width: 153px;
+        }
+        @include iphoneXS {
+          width: 216px;
+          top: 53px;
+        }
+      }
+    }
+    .banner{
+      opacity: 0;
+      visibility: hidden;
+      transition: visibility 0s .25s linear, opacity .2s linear;
+    }
+    .game-zone{
+      .game{
+        .goalkeeper, .shadow{
+          opacity: 0;
+          visibility: hidden;
+          transition: visibility 0s .25s linear, opacity .2s linear;
+        }
+        img{
+          &.ball, &.ball-clear{
+            opacity: 0;
+            visibility: hidden;
+            transition: visibility 0s .25s linear, opacity .2s linear;
+          }
+        }
+      }
+      .quiz{
+        opacity: 0;
+        visibility: hidden;
+        transition: visibility 0s .25s linear, opacity .2s linear;
+      }
+    }
+    .done{
+      transition: visibility 0s linear, opacity .2s linear;
+    }
+  }
+  &.--again{
+    .done{
+      &:not(.final){
+        opacity: 1;
+        visibility: visible; 
+      }
+    }
+  }
+  &.--done{
+    .done{
+      &.final{
+        opacity: 1;
+        visibility: visible;
+        h2 ~ span{
+          @include android(){
+            margin-top: 14px;
+            font-size: 16px;
+            line-height: 22px;
+          }
+        }
+        form{
+          margin-top: auto;
+          width: 100%;
+          padding: 0 24px;
+          .input{
+            display: flex;
+            align-items: center;
+            padding: 0 35px;
+            width: 100%;
+            height: 35px;
+            background-image: url(/img/input.png);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            @include iphoneX {
+              height: 64px;
+            }
+            &#name{
+              margin-bottom: 9px;
+            }
+            &.error{
+              filter: drop-shadow(0px 0px 2px rgb(255, 62, 62));
+            }
+            img{
+              height: 20px;
+              margin-right: 8px;
+            }
+            input{
+              flex-grow: 1;
+              font-size: 14px;
+              color: #65656B;
+              border: 0;
+              outline: none;
+              background-color: transparent;
+              &::placeholder{
+                font-family: 'Cera Pro Bold';
+                font-size: 14px;
+                color: #65656B;
+              }
+              &:focus{
+                border: 0;
+                outline: none;
+              }
+            }
+          }
+          label{
+            margin: 15px 0 20px;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            @include iphoneX {              
+              margin: 22px 0 30px;
+              padding: 0 20px;
+            }
+            .round{
+              background-color: $blue;
+              display: flex;
+              width: 20px;
+              height: 20px;
+              border-radius: 20px;
+              align-items: center;
+              justify-content: center;
+              padding: 6px;
+              margin-right: 10px;
+              img{
+                opacity: 0;
+                width: 100%;
+              }
+            }
+            input:checked~.round{
+              img{
+                opacity: 1;
+              }
+            }
+            span{
+              font-size: 12px;
+              line-height: 13px;
+              margin-top: 0;
+              text-align: left;
+            }
+          }
+        }
+        .btn{
+          &#submit{
+            &[data-disabled]{
+              pointer-events: none;
+              background-position-y: -59px * 2;
+              color: darkgray;
+              @include android(){
+                background-position-y: -36px * 2;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes flow {
+  0%{
+    stroke: #73B900;
+    stroke-dashoffset: 0;
+  }
+  50%{
+    stroke: #EE9D00;
+    stroke-dashoffset: 100;
+  }  
+  75%{
+    stroke: #FF002E;
+    stroke-dashoffset: 150;
+  }
+  99%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+    stroke-dashoffset: 200;
+    stroke: #FF002E;
+  }
+}
+
+@keyframes metafan {
+    0%{
+      opacity: 0;
+      transform: translateY(-77px);
+    }
+    30%{
+      opacity: .5;
+    }
+    60%{
+      opacity: 1;
+    }
+    100%{
+      opacity: 1;
+      transform: translateY(0);
+    }
+}
+
+@keyframes g-stands {
+  0%{
+    transform: rotateY(-15deg);
+  }
+  100%{
+    transform: rotateY(15deg);
+  }
+}
+
+@keyframes up-left {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(-146px, -180px) rotate(2350deg) scale(.3);
+  }
+}
+
+@keyframes correct-up-left {
+  0%{
+    transform: translate(-50%) rotateY(180deg) scale(.7)
+  }
+  100%{
+    transform: translate(-73%, 6%) rotateY(180deg) scale(.6);
+  }
+}
+
+@keyframes incorrect-up-left {
+  0%{
+    transform: translate(-50%) rotateY(180deg) scale(.7)
+  }
+  100%{
+    transform: translate(-73%, -1%) rotateY(180deg) scale(.6);
+  }
+}
+
+@keyframes up-right {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(93px, -181px) rotate(2350deg) scale(.3);
+  }
+}
+
+@keyframes correct-up-right {
+  0%{
+    transform: translate(-50%) scale(.7)
+  }
+  100%{
+    transform: translate(-28%, 6%) scale(.6);
+  }
+}
+
+@keyframes incorrect-up-right {
+  0%{
+    transform: translate(-50%) scale(.7)
+  }
+  100%{
+    transform: translate(-26%, -1%) scale(.6);
+  }
+}
+
+@keyframes down-left {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(-148px, -155px) rotate(2350deg) scale(.3);
+  }
+}
+
+@keyframes correct-down-left {
+  0%{
+    transform: translate(-50%) rotateY(180deg) scale(.7)
+  }
+  100%{
+    transform: translate(-66%, 0%) rotateY(180deg) scale(.6);
+  }
+}
+
+@keyframes incorrect-down-left {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(-144px, -126px) rotate(2350deg) scale(.3);
+  }
+}
+
+@keyframes down-right {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(96px, -145px) rotate(2350deg) scale(.3);
+  }
+}
+
+@keyframes correct-down-right {
+  0%{
+    transform: translate(-50%) scale(.7)
+  }
+  100%{
+    transform: translate(-34%, 5%) scale(.6);
+  }
+}
+
+@keyframes incorrect-down-right {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(91px, -113px) rotate(2350deg) scale(.3);
+  }
+}
+
+// android
+
+@keyframes up-left-android {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(-129px, -158px) rotate(2350deg) scale(.35);
+  }
+}
+
+@keyframes correct-up-left-android {
+  0%{
+    transform: translate(-50%) rotateY(180deg) scale(.7)
+  }
+  100%{
+    transform: translate(-73%, 10%) rotateY(180deg) scale(.6);
+  }
+}
+
+@keyframes incorrect-up-left-android {
+  0%{
+    transform: translate(-50%) rotateY(180deg) scale(.7)
+  }
+  100%{
+    transform: translate(-73%, 4%) rotateY(180deg) scale(.6);
+  }
+}
+
+@keyframes up-right-android {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(87px, -162px) rotate(2350deg) scale(.35);
+  }
+}
+
+@keyframes correct-up-right-android {
+  0%{
+    transform: translate(-50%) scale(.7)
+  }
+  100%{
+    transform: translate(-28%, 8%) scale(.6);
+  }
+}
+
+@keyframes incorrect-up-right-android {
+  0%{
+    transform: translate(-50%) scale(.7)
+  }
+  100%{
+    transform: translate(-26%, 2%) scale(.6);
+  }
+}
+
+@keyframes down-left-android {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(-134px, -119px) rotate(2350deg) scale(.35);
+  }
+}
+
+@keyframes correct-down-left-android {
+  0%{
+    transform: translate(-50%) rotateY(180deg) scale(.7)
+  }
+  100%{
+    transform: translate(-66%, 14%) rotateY(180deg) scale(.6);
+  }
+}
+
+@keyframes incorrect-down-left-android {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(-134px, -86px) rotate(2350deg) scale(.35);
+  }
+}
+
+@keyframes down-right-android {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(88px,-116px) rotate(2350deg) scale(.35);
+  }
+}
+
+@keyframes correct-down-right-android{
+  0%{
+    transform: translate(-50%) scale(.7)
+  }
+  100%{
+    transform: translate(-34%, 15%) scale(.6);
+  }
+}
+
+@keyframes incorrect-down-right-android {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(90px,-83px) rotate(2350deg) scale(.35);
+  }
+}
+
+//iphoneX
+
+@keyframes up-left-iphoneX {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(-179px, -227px) rotate(2350deg) scale(.3);
+  }
+}
+
+@keyframes correct-up-left-iphoneX {
+  0%{
+    transform: translate(-50%) rotateY(180deg) scale(.7)
+  }
+  100%{
+    transform: translate(-69%, -12%) rotateY(180deg) scale(.6);
+  }
+}
+
+@keyframes incorrect-up-left-iphoneX {
+  0%{
+    transform: translate(-50%) rotateY(180deg) scale(.7)
+  }
+  100%{
+    transform: translate(-73%, -22%) rotateY(180deg) scale(.6);
+  }
+}
+
+@keyframes up-right-iphoneX {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(96px, -223px) rotate(2350deg) scale(.3);
+  }
+}
+
+@keyframes correct-up-right-iphoneX {
+  0%{
+    transform: translate(-50%) scale(.7)
+  }
+  100%{
+    transform: translate(-29%, -14%) scale(.6);
+  }
+}
+
+@keyframes incorrect-up-right-iphoneX {
+  0%{
+    transform: translate(-50%) scale(.7)
+  }
+  100%{
+    transform: translate(-26%, -20%) scale(.6);
+  }
+}
+
+@keyframes down-left-iphoneX {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(-185px, -156px) rotate(2350deg) scale(.3);
+  }
+}
+
+@keyframes correct-down-left-iphoneX {
+  0%{
+    transform: translate(-50%) rotateY(180deg) scale(.7)
+  }
+  100%{
+    transform: translate(-67%, -6%) rotateY(180deg) scale(.6);
+  }
+}
+
+@keyframes incorrect-down-left-iphoneX {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(-180px, -119px) rotate(2350deg) scale(.3);
+  }
+}
+
+@keyframes down-right-iphoneX {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(96px, -158px) rotate(2350deg) scale(.3);
+  }
+}
+
+@keyframes correct-down-right-iphoneX {
+  0%{
+    transform: translate(-50%) scale(.7)
+  }
+  100%{
+    transform: translate(-34%, -5%) scale(.6);
+  }
+}
+
+@keyframes incorrect-down-right-iphoneX {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(91px, -115px) rotate(2350deg) scale(.3);
+  }
+}
+
+// iphoneXS
+
+@keyframes up-left-iphoneXS {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(-176px, -265px) rotate(2350deg) scale(.3);
+  }
+}
+
+@keyframes correct-up-left-iphoneXS {
+  0%{
+    transform: translate(-50%) rotateY(180deg) scale(.7)
+  }
+  100%{
+    transform: translate(-69%, -12%) rotateY(180deg) scale(.6);
+  }
+}
+
+@keyframes incorrect-up-left-iphoneXS {
+  0%{
+    transform: translate(-50%) rotateY(180deg) scale(.7)
+  }
+  100%{
+    transform: translate(-73%, -21%) rotateY(180deg) scale(.6);
+  }
+}
+
+@keyframes up-right-iphoneXS {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(96px, -265px) rotate(2350deg) scale(.3);
+  }
+}
+
+@keyframes correct-up-right-iphoneXS {
+  0%{
+    transform: translate(-50%) scale(.7)
+  }
+  100%{
+    transform: translate(-33%, 4%) scale(.6);
+  }
+}
+
+@keyframes incorrect-up-right-iphoneXS {
+  0%{
+    transform: translate(-50%) scale(.7)
+  }
+  100%{
+    transform: translate(-26%, -20%) scale(.6);
+  }
+}
+
+@keyframes down-left-iphoneXS {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(-185px, -203px) rotate(2350deg) scale(.3);
+  }
+}
+
+@keyframes correct-down-left-iphoneXS {
+  0%{
+    transform: translate(-50%) rotateY(180deg) scale(.7)
+  }
+  100%{
+    transform: translate(-67%, -6%) rotateY(180deg) scale(.6);
+  }
+}
+
+@keyframes incorrect-down-left-iphoneXS {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(-180px, -163px) rotate(2350deg) scale(.3);
+  }
+}
+
+@keyframes down-right-iphoneXS {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(96px, -191px) rotate(2350deg) scale(.3);
+  }
+}
+
+@keyframes correct-down-right-iphoneXS {
+  0%{
+    transform: translate(-50%) scale(.7)
+  }
+  100%{
+    transform: translate(-34%, -5%) scale(.6);
+  }
+}
+
+@keyframes incorrect-down-right-iphoneXS {
+  0%{
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  100%{
+    transform: translate(91px, -159px) rotate(2350deg) scale(.3);
+  }
+}
+

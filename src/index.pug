@@ -4,5 +4,17 @@ html
     meta(charset="UTF-8")
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    title HTML Page
-  body 
+    title First Quiz
+    link(rel="shortcut icon", href="img/favicon.svg", type="image/svg+xml")
+    link(rel="stylesheet", href="css/main.css")
+    script(src="js/env.js") 
+    script(src="js/main.js") 
+  body
+    .wrapper.fullscreen
+      //= templates/background.pug
+      //= templates/gradient.pug
+      //= templates/splash.pug
+      //= templates/faq.pug
+      //= templates/quiz.pug
+      //= templates/lights.pug
+    .buffer.abs

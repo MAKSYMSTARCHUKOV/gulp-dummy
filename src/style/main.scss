@@ -1,1 +1,49 @@
 @import 'default';
+@import 'background';
+@import 'splash';
+@import 'faq';
+@import 'quiz';
+@import 'lights';
+
+
+.wrapper{
+  &.--splash{
+    .sp{
+      display: block;
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+  &.--faq{
+    .fq{
+      display: flex;
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+  &.--quiz{
+    .qz{
+      display: flex;
+      opacity: 1;
+      visibility: visible;
+    }
+  }&.--lights{
+    .lg{
+      display: flex;
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+  .fq, .qz, .sp, .lg{
+    opacity: 0;
+    visibility: hidden;  
+    transition: visibility 0s linear, opacity .2s linear;
+  }
+}
+
+.buffer{
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  top: -1px;
+}

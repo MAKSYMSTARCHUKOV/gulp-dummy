@@ -1,0 +1,88 @@
+.qz.fullscreen.abs
+  img#logo.abs(src="img/logo.svg" alt="First")
+  .btn.abs#btn-3
+  .banner
+    .timer
+      .left
+        span Питання
+        .questions
+          span#current 1
+          | &nbsp;
+          span з
+          | &nbsp;
+          span#total 5
+      .loader
+        svg.abs
+          circle(cx="32" cy="32" r="32")
+        svg.abs#progress
+          circle(cx="32" cy="32" r="32")        
+        .sec.abs
+          span#sec 30
+          span секунд
+    .task
+    img.metafan.abs(src="/img/metafan.png")
+  .game-zone.abs
+    .game
+      img.gates(src="/img/gates.png")
+      .goalkeeper.abs
+        .picture
+      img.ball.abs(src="/img/ball.png")
+      img.ball-clear.abs(src="/img/ball_clear.png")
+      .shadow
+    .quiz
+      .quiz-result
+      .quiz-item
+        span
+      .quiz-item
+        span
+      .quiz-item
+        span
+      .quiz-item
+        span
+  .done
+    h2 Хочеш
+      br
+      .
+        спробувати забити усі голи?
+    span Адже новенький айфон
+      br
+      .
+        сам себе не виграє
+    img#phones(src="img/phones.png")
+    .btn#btn-2 Спробувати ще раз
+    //- .btn#next-btn Перейти далі
+  .done.final
+    img#metafan.abs(src="img/metafan.png")
+    h2 Вітаємо!
+      br
+      .
+        Забито 3 голи
+    span Три шанси отримати
+      br
+      .
+        новесенький айфон
+      br
+      .
+        вже в тебе!
+      br
+      .
+        Реєструйся та скористайся
+      br
+      .
+        ними для розіграшу.
+    form(name="register")
+      .input#name
+        img(src="img/name.svg" alt="Name")
+        input(type="text" name="name" autocomplete="off" placeholder="Ім'я")
+      .input
+        img(src="img/message.svg" alt="Email")
+        input(type="text" name="email" autocomplete="off" placeholder="Email")
+      label
+        input(type="checkbox" name="mature" hidden)
+        .round
+          img(src="img/check.svg", alt="!")
+        span Мені вже виповнилось 21 рік та я погоджуюсь
+          br
+          .
+            на обробку персональних даних.
+    .btn#submit(data-disabled="true") Зареєструватись

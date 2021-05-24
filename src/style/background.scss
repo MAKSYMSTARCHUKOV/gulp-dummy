@@ -1,0 +1,42 @@
+.bg, .gd{  
+  background: none;
+  background-size: cover;
+  background-position: center bottom; 
+  background-repeat: no-repeat;
+}
+
+.wrapper{
+  &.--faq{
+    .bg{
+      background-image: url(/img/back_stadium_faq.png);
+    }
+    .gd{
+      background-size: 100% 290px;
+      background-image: linear-gradient(180deg, rgba(24, 24, 41, 0) 0%, #181829 84.37%);
+    }
+  }
+  &.--quiz{
+    .bg{
+      background-image: url(/img/back_stadium.png);
+      background-position-y: 0;
+      @include iphoneX {
+        background-position-y: inherit;
+      }
+    }
+    .gd{
+      background-size: 100% 100%;
+      background: linear-gradient(180deg, #181829 0%, transparent 33%, rgba(#181829, .5) 65%, #181829 100%);
+
+    }
+  }
+  &.--lights{
+    .bg{
+      background-image: url(/img/back_lights.png);
+    }
+    .gd{
+      background-size: 100% 290px;
+      background: linear-gradient(180deg, #181829 0%, transparent 33%, rgba(#181829, .5) 79%, #181829 100%);
+
+    }
+  }
+}
