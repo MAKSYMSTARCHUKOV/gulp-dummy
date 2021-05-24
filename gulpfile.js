@@ -7,6 +7,7 @@ const {
 const gulp = require('gulp'),
   watch = require('gulp-watch'),
   prefixer = require('gulp-autoprefixer'),
+  babel = require('gulp-babel'),
   uglify = require('gulp-uglify-es').default,
   rigger = require('gulp-rigger'),
   sass = require('gulp-sass'),
@@ -30,7 +31,7 @@ var path = {
   src: {
     pug: 'src/**/*.pug',
     html: 'src/*.html',
-    js: 'src/js/main.js',
+    js: 'src/js/*.js',
     style: 'src/style/main.scss',
     img: 'src/img/**/*.*',
     fonts: 'src/fonts/**/*.*'
@@ -78,9 +79,16 @@ gulp.task('pug:build', function (cb) {
 });
 
 gulp.task('js:build', function (cb) {
-  gulp.src(path.src.js,{allowEmpty: true})
+  gulp.src(path.src.js, {
+      allowEmpty: true
+    })
     .pipe(sourcemaps.init())
-    .pipe(uglify())
+    .pipe(babel({
+      presets: ['@babel/preset-env']
+    }))
+    .pipe(uglify().on('error', function (e) {
+      console.log(e);
+    }))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(path.build.js))
     .pipe(reload({
