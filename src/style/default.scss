@@ -1,0 +1,17 @@
+@import 'var';
+@import 'mix';
+
+html, body {
+  min-height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  color: white;
+  box-sizing: border-box;
+  overflow-y: auto;
+  @include mid(){
+    height: 100%;
+    overflow: hidden;
+  }
+}

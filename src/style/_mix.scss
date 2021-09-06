@@ -1,0 +1,63 @@
+@mixin mid{
+  @media screen and (min-width: 900px) {
+    @content;
+  }
+}
+
+@mixin land{
+  @media screen and (max-width: 899px) and (orientation: landscape) {
+    @content;
+  }
+}
+
+@mixin lg{
+  @media screen and (min-width: 2000px) and (min-height: 1200px) {
+    @content;
+  }
+}
+
+@mixin xlg{
+  @media screen and (min-width: 2600px) and (min-height: 1400px) {
+    @content;
+  }
+}
+
+@mixin android() {
+  @media screen and (min-width: 360px) and (min-height: 590px) {
+    @content;
+  }
+}
+
+@mixin mob(){
+  @media screen and (min-width: 360px) {
+    @content;
+  }
+}
+
+@mixin small-iphone{
+  @media screen and (min-width: 370px) and (min-height: 530px) {
+    @content;
+  }
+}
+
+@mixin iphone(){
+  @media screen and (min-width: 400px) and (min-height: 700px) {
+    @content;
+  }
+}
+
+@mixin hCenter(){
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@mixin vCenter(){
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@mixin aCenter(){
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
