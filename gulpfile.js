@@ -30,7 +30,7 @@ var path = {
   src: {
     pug: 'src/**/*.pug',
     html: 'src/*.html',
-    js: 'src/js/*.js',
+    js: 'src/js/script.js',
     style: 'src/style/main.scss',
     img: 'src/img/**/*.*',
     fonts: 'src/fonts/**/*.*'
@@ -78,7 +78,8 @@ gulp.task('pug:build', function (cb) {
 });
 
 gulp.task('js:build', function (cb) {
-  gulp.src(path.src.js)
+  gulp.src(path.src.js, {allowEmpty: true})
+    .pipe(rigger())
     .pipe(sourcemaps.init())
     .pipe(uglify())
     .pipe(gulp.dest(path.build.js))
@@ -89,7 +90,7 @@ gulp.task('js:build', function (cb) {
 });
 
 gulp.task('style:build', function (cb) {
-  gulp.src(path.src.style)
+  gulp.src(path.src.style, {allowEmpty: true})
     .pipe(sourcemaps.init())
     .pipe(sass())
     .pipe(prefixer())
