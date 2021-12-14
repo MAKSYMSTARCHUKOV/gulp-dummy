@@ -1,5 +1,9 @@
-function defineDevice(){
+function defineHeight(){
   document.documentElement.style.setProperty('--vh', window.innerHeight / 100 + 'px');
+}
+
+function defineDevice(){
+  defineHeight();
   _device = 
     window.matchMedia('(max-width: 900px)').matches 
       ? 'mobile' 
