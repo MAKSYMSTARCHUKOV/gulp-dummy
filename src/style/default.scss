@@ -2,8 +2,8 @@
 @import 'mix';
 
 html, body {
-  min-height: 100%;
-  width: 100%;
+  min-height: calc(var(--vh, 1vh) * 100);
+  width: 100vw;
   padding: 0;
   margin: 0;
   border: 0;
@@ -11,7 +11,7 @@ html, body {
   box-sizing: border-box;
   overflow-y: auto;
   @include mid(){
-    height: 100%;
+    height: calc(var(--vh, 1vh) * 100);
     overflow: hidden;
   }
 }
