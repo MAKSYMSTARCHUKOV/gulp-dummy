@@ -1,16 +1,22 @@
+const MOBILE = 'mobile';
+const DESKTOP = 'desktop';
+const LOADED_CLASS = '--loaded';
+const FIRST_IMG = []
+
 function defineHeight(){
   document.documentElement.style.setProperty('--vh', window.innerHeight / 100 + 'px');
 }
 
-function defineDevice(){
+function defineDevice(callback = () => {}){
   defineHeight();
-  _device = 
+  window._device = 
     window.matchMedia('(max-width: 900px)').matches 
-      ? 'mobile' 
-      : 'desktop';
+      ? MOBILE 
+      : DESKTOP;
+  callback()
 }
 
-function uploadFirst(filesArr, callback){
+function uploadFirstImages(filesArr, callback){
   return new Promise(async (resolve, reject) => {
     await Promise.allSettled(
       filesArr.map(_ => {

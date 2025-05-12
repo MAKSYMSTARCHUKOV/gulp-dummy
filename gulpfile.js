@@ -25,7 +25,8 @@ var path = {
     js: 'build/js/',
     css: 'build/css/',
     img: 'build/img/',
-    fonts: 'build/css/fonts/'
+    fonts: 'build/css/fonts/',
+    etc: 'build/etc/',
   },
   src: {
     pug: 'src/**/*.pug',
@@ -33,7 +34,8 @@ var path = {
     js: 'src/js/script.js',
     style: 'src/style/main.scss',
     img: 'src/img/**/*.*',
-    fonts: 'src/fonts/**/*.*'
+    fonts: 'src/fonts/**/*.*',
+    etc: 'src/etc/**/*.*'
   },
   watch: {
     pug: 'src/**/*.pug',
@@ -41,7 +43,8 @@ var path = {
     js: 'src/js/**/*.js',
     style: 'src/style/**/*.scss',
     img: 'src/img/**/*.*',
-    fonts: 'src/fonts/**/*.*'
+    fonts: 'src/fonts/**/*.*',
+    etc: 'src/etc/**/*.*'
   },
   clean: './build'
 };
@@ -125,6 +128,12 @@ gulp.task('fonts:build', function (cb) {
   cb();
 });
 
+gulp.task('etc:build', function (cb) {
+  gulp.src(path.src.etc)
+    .pipe(gulp.dest(path.build.etc))
+  cb();
+});
+
 gulp.task('build',
   parallel(
     'pug:build',
@@ -132,7 +141,8 @@ gulp.task('build',
     'js:build',
     'style:build',
     'fonts:build',
-    'image:build')
+    'image:build',
+    'etc:build')
 );
 
 gulp.task('watch', function () {
@@ -142,6 +152,7 @@ gulp.task('watch', function () {
   watch(path.watch.js, series('js:build'));
   watch(path.watch.img, series('image:build'));
   watch(path.watch.fonts, series('fonts:build'));
+  watch(path.watch.fonts, series('etc:build'));
 });
 
 gulp.task('webserver', function (cb) {
